@@ -1,6 +1,3 @@
-# Java 成神之路
-记录一些自己学习java的心得，有任何不足或错误的地方请指正
-
 # ***Java成神之路***
 
 一个天才的崛起之路
@@ -75,8 +72,8 @@
 #### 1. 阅读源代码
 
 - String , Integer, Long, Enum, BigDecimal, ThreadLocal, ClassLoader&& URLClassLoader, 
-  			  ArrayList && LinkedList,HashMap && LinkedHashMap && TreeMap && CouncurrenHashMap
-    			HashSet && LinkedHashSet && TreeSet , HashTable
+  		  ArrayList && LinkedList,HashMap && LinkedHashMap && TreeMap && CouncurrenHashMap
+   			HashSet && LinkedHashSet && TreeSet , HashTable
 
 
 
@@ -97,7 +94,7 @@
 - 占用字节
 
   | 数据类型 | 占用字节 | 默认值       | 封装类    |                                                              |
-| -------- | -------- | ------------ | --------- | ------------------------------------------------------------ |
+  | -------- | -------- | ------------ | --------- | ------------------------------------------------------------ |
   | byte     | 1        | 0            | Byte      | -128~ 127（-2的7次方到2的7次方-1）                           |
   | short    | 2        | 0            | Short     | -32768～32767（-2的15次方到2的15次方-1）                     |
   | int      | 4        | 0            | Integer   | -2147483648～2147483647（-2的31次方到2的31次方-1）           |
@@ -105,21 +102,16 @@
   | float    | 4        | 0.0f         | Float     | 3.402823e+38～1.401298e-45（e+38 表示乘以10的38次方，而e-45 表示乘以10的负45次方） |
   | double   | 8        | 0            | Double    | 1.797693e+308～4.9000000e-324（e+38 表示乘以10的38次方，而e-45 表示乘以10的负45次方） |
   | char     | 2        | \u0000(空格) | Character | 通常gbk / gb2312 是两个字节，utf-8 是3个字节。               |
-  
-  -  **`通常的浮点型数据在不声明的情况下都是double型的，如果要表示一个数据时float 型的，可以在数据后面加上 "F" 。`**
 
+  - **`通常的浮点型数据在不声明的情况下都是double型的，如果要表示一个数据时float 型的，可以在数据后面加上 "F" 。`**
   - double 类型比float 类型存储范围更大，精度更高。
-
   - char 有多种初始化方式：
-
     - char ch = 'a'; // 可以是汉字，因为是Unicode编码
-
     - char ch = 1010; // 可以是十进制数、八进制数、十六进制数等等。
-
     - char ch = '\0'; // 可以用字符编码来初始化，如：'\0' 表示结束符，它的ascll码是0，这句话的意思和 ch = 0 是一个意思。
-  - String.getBytes(encoding) 方法获取的是指定编码的byte数组表示。
+    - String.getBytes(encoding) 方法获取的是指定编码的byte数组表示。
     - 通常gbk / gb2312 是两个字节，utf-8 是3个字节。如果不指定encoding 则获取系统默认encoding 
-  
+
   
 
 - 类型转换
@@ -461,6 +453,7 @@
   
 
 - String.valueOf和Integer.toString的区别
+
   - Integer.toString() ： 返回指定整数的有符号位的String对象，以10进制字符串形式返回
 
   ```java
@@ -663,24 +656,24 @@
 
 #### 5. 熟悉Java的关键字
 
-* transient : 可以防止特定的属性被序列化可以那个属性上加上这个关键字
-* instanceof : 判断这个变量所属的实例对象
-* volatile ： 当有多个线程需要异步改变同一个变量的值时，就在那个变量前加上这个关键字
-* synchronized : 
-* final : 
-* static : 
-* super : 
-* this : 
+- transient : 可以防止特定的属性被序列化可以那个属性上加上这个关键字
+- instanceof : 判断这个变量所属的实例对象
+- volatile ： 当有多个线程需要异步改变同一个变量的值时，就在那个变量前加上这个关键字
+- synchronized : 
+- final : 
+- static : 
+- super : 
+- this : 
 
 
 
 #### 6. 集合类的使用
 
-* 阅读源代码
+- 阅读源代码
 
 - 常用集合类的使用
 
--  ArrayList和LinkedList和Vector的区别
+- ArrayList和LinkedList和Vector的区别
 
   - ArrayList : 动态数组，**`查询效率高`**,  是Array的复杂版本， 动态的增加和减少元素，当有更多的元素加入到ArrayList中时，其大小会动态的增长。 可以使用get/set方法直接访问其中的元素，因为ArrayList的本质是一个数组。**`当扩容时， 一次增长50%。`**
 
@@ -699,13 +692,13 @@
 
 - HashMap,HashTable,concurrentHashMap 区别
 
-  * 线程安全性 ： HashTable线程安全， HashMap线程不安全。concurrentHashMap是HashMap线程安全的的实现方法，将HashMap分割，对局部加锁
-  * HashTable不允许NULL key 和null value, HashMap允许。
-  * HashMap比Hashtable快，concurrentHashMap效率比HashTable要高，所以HashTable淘汰了
-  * `HashMap和ConCurrentHashMap的对比`： 
-    * ConcurrentHashMap对整个桶数组进行了分割分段(Segment)，然后在每一个分段上都用lock锁进行保护，相对于HashTable的syn关键字锁的粒度更精细了一些，并发性能更好。
-    * 而HashMap没有锁机制，不是线程安全的。
-    * HashMap的键值对允许有null，但是ConCurrentHashMap都不允许
+  - 线程安全性 ： HashTable线程安全， HashMap线程不安全。concurrentHashMap是HashMap线程安全的的实现方法，将HashMap分割，对局部加锁
+  - HashTable不允许NULL key 和null value, HashMap允许。
+  - HashMap比Hashtable快，concurrentHashMap效率比HashTable要高，所以HashTable淘汰了
+  - `HashMap和ConCurrentHashMap的对比`： 
+    - ConcurrentHashMap对整个桶数组进行了分割分段(Segment)，然后在每一个分段上都用lock锁进行保护，相对于HashTable的syn关键字锁的粒度更精细了一些，并发性能更好。
+    - 而HashMap没有锁机制，不是线程安全的。
+    - HashMap的键值对允许有null，但是ConCurrentHashMap都不允许
 
 - 不同版本的JDK中HashMap的实现区别和原因
 
@@ -724,7 +717,6 @@
 - Enum类
 
   
-
 
 #### 8. Java IO流 & Java NIO  
 
@@ -750,7 +742,7 @@
 - 序列化底层原理
 - 序列化与单例模式
 - protobuf
--  为什么说序列化不安全
+- 为什么说序列化不安全
 
 
 
@@ -856,7 +848,7 @@
 #### 2.阅读源代码
 
 - 学会使用Thread, Runnable, Callable, ReentrantLock, ReentrantReadWriteLock, Atomic*,
-  					   Semaphore,CountDownLatch, CouncurrenHashMap, Executors
+  	   Semaphore,CountDownLatch, CouncurrenHashMap, Executors
 
 
 
@@ -879,36 +871,23 @@
 #### 5. 锁相关
 
 - CAS
-
 - 乐观锁与悲观锁
-
 - 数据库相关锁机制
-
 - 分布式锁
-
 - 偏向锁
-
 - 轻量级锁
-
 - 重量级锁
-
 - monitor
-
 - 锁优化，锁消除，锁粗化
-
 - 自旋锁， 可重入锁，阻塞锁，死锁
-
 - 死锁相关
-
   - volatile
-
     - happens-before
-
     - 编译器指令重排和CPU指令重排
 - synchronized
-    - synchronized如何实现的
-    - synchronized和lock之间的关系
-    - 不使用synchronized和lock如何实现一个线程安全的单例
+  - synchronized如何实现的
+  - synchronized和lock之间的关系
+  - 不使用synchronized和lock如何实现一个线程安全的单例
   - sleep和wait
   - wait和notify
   - ThreadLocal
@@ -1092,7 +1071,7 @@
 
 #### 1. Java 8
 
--  lambda表达式
+- lambda表达式
 - Stream API
 
 
@@ -1544,8 +1523,6 @@
 ## 区块链
 
 #### 1. 哈希算法， Merkle树， 公钥密码算法， 共识算法， Raft协议， Paxos算法与Raft算法， 消息认证码与数字签名
-
-
 
 
 
