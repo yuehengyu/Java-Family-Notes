@@ -2,7 +2,50 @@
 
 # SpringBoot 学习笔记
 
-[TOC]
+   * [SpringBoot 学习笔记](#springboot-学习笔记)
+      * [1. 默认扫描器 basebackage](#1-默认扫描器-basebackage)
+      * [2. Spring boot热部署](#2-spring-boot热部署)
+      * [3. Spring boot 微服务](#3-spring-boot-微服务)
+      * [4. 简化部署springboot应用](#4-简化部署springboot应用)
+      * [5. Springboot启动细节探究](#5-springboot启动细节探究)
+         * [5.1 <strong>POM文件</strong>](#51-pom文件)
+         * [5.2 <strong>Springboot的启动细节详解</strong>](#52-springboot的启动细节详解)
+            * [5.2.1 Springboot中启动相关的重要注解](#521-springboot中启动相关的重要注解)
+            * [5.2.2 自动配置的原理](#522-自动配置的原理)
+               * [5.2.2.1 <strong>@SpringBootApplication</strong>](#5221-springbootapplication)
+               * [5.2.2.2 <strong>@EnableAutoConfiguration</strong>](#5222-enableautoconfiguration)
+               * [5.2.2.3 HttpEncodingAutoConfiguration 自动配置注解及流程详解](#5223-httpencodingautoconfiguration-自动配置注解及流程详解)
+               * [5.2.2.4 debug模式下观察自动配置是否生效](#5224-debug模式下观察自动配置是否生效)
+      * [6. Sprintboot的相关配置及配置文件](#6-sprintboot的相关配置及配置文件)
+         * [6.1 <strong>application.properties</strong> (名字是固定的)](#61-applicationproperties-名字是固定的)
+         * [6.2 **application.yml **(名字是固定的)](#62-applicationyml-名字是固定的)
+            * [6.2.1 <strong>YAML的基本语法</strong>](#621-yaml的基本语法)
+            * [6.2.2 <strong>如何在指定的class内获取yml配置文件的值</strong>](#622-如何在指定的class内获取yml配置文件的值)
+            * [6.2.3 <strong>将yaml中的代码改写在application.properties中</strong>](#623-将yaml中的代码改写在applicationproperties中)
+            * [6.2.4 <strong>什么时候使用@Value或@ConfigurationProperties，有什么区别</strong>](#624-什么时候使用value或configurationproperties有什么区别)
+         * [6.3 <strong>@PropertySource</strong>注解和**@ImportSource**注解的使用](#63-propertysource注解和importsource注解的使用)
+            * [6.3.1 <strong>@PropertySource</strong>：加载指定的配置文件](#631-propertysource加载指定的配置文件)
+            * [6.3.2 <strong>@ImportSource</strong>： 导入Spring的配置文件，让相应配置文件生效](#632-importsource-导入spring的配置文件让相应配置文件生效)
+         * [6.4 配置文件占位符](#64-配置文件占位符)
+         * [<a name="user-content-开发环境切换">6.5 <strong>Springboot中的Profile/开发环境的切换</strong></a>](#65-springboot中的profile开发环境的切换)
+            * [6.5.1 <strong>多Profile文件的方式</strong>](#651-多profile文件的方式)
+            * [6.5.2 <strong>yml多文档块方式</strong>](#652-yml多文档块方式)
+            * [6.5.3 <strong>如何在命令行中激活指定profile</strong>](#653-如何在命令行中激活指定profile)
+         * [6.6 配置文件的加载位置和加载顺序](#66-配置文件的加载位置和加载顺序)
+            * [6.6.1 改变默认的配置文件位置](#661-改变默认的配置文件位置)
+         * [6.7 外部配置加载顺序](#67-外部配置加载顺序)
+            * [6.7.1 常用的场景](#671-常用的场景)
+            * [6.7.2 配置文件中都有哪些属性可以使用](#672-配置文件中都有哪些属性可以使用)
+      * [7. Springboot&amp;&amp;日志](#7-springboot日志)
+         * [7.1 市面上常用的日志框架](#71-市面上常用的日志框架)
+         * [7.2 Slf4j使用](#72-slf4j使用)
+            * [7.2.1 如何在系统中使用Slf4j](#721-如何在系统中使用slf4j)
+            * [7.2.2 不同的日志框架统一转换成slf4j](#722-不同的日志框架统一转换成slf4j)
+         * [7.3 Springboot日志关系](#73-springboot日志关系)
+         * [7.4 Springboot中的日志默认配置](#74-springboot中的日志默认配置)
+         * [7.5 自定义日志配置文件](#75-自定义日志配置文件)
+         * [7.6 切换日志框架](#76-切换日志框架)
+      * [8. Springboot&amp;&amp;Web开发](#8-springbootweb开发)
 
 ## 1. 默认扫描器 basebackage
 
@@ -191,7 +234,7 @@ Springboot将所有的功能场景都抽取了出来做成了不同的starter启
 
 综上，**@EnableAutoConfiguration**注解就是将jar包中**META-INF/spring.factories**配置的所有EnableAutoConfiguration的值都加在到容器中
 
-![image-20200806140428342](images/spring_factories.png)
+![image-20200806140428342](images/spring_factories)
 
 上图中的每一个XXXAutoConfiguration都是容器中的一个组件，加入到容器中后用来做自动配置
 
@@ -321,7 +364,6 @@ server:
   **基本类型：数字，字符串，布尔值**
 
   key: value 直接写相应的值就行；
-
   - 字符串默认不用加单引号或双引号
 
     双引号“ ”：会将特殊字符换成对应的转义格式
@@ -551,7 +593,7 @@ person.cat.age=${person.catAge:2} //冒号后面的值是自定义的默认值
 
 在配置主配置文件的时候，我们可以将配置文件名改为application-{profile}.properties/yml
 
-![image-20200729180026636](images\profile切换环境1)
+![image-20200729180026636](images/profile切换环境1)
 
 ![image-20200729180055572](images\profile切换环境2)
 
@@ -634,7 +676,7 @@ Springboot启动时会扫描以下位置的application.properties或者applicati
 
 ### 6.7 外部配置加载顺序
 
-Springboot官方文档提供了17个外部配置(springboot 2.3.3)：==优先级从高到低==：高优先级覆盖低优先级，不同内容的配置==会共存==![image-20200804114902447](images/external%20configuration)
+Springboot官方文档提供了17个外部配置(springboot 2.3.3)：==优先级从高到低==：高优先级覆盖低优先级，不同内容的配置==会共存==![image-20200804114902447](images/external configuration)
 
 想要了解详情可以直接去官方文档进行查看: [官方文档](https://docs.spring.io/spring-boot/docs/2.3.3.BUILD-SNAPSHOT/reference/html/spring-boot-features.html#boot-features-external-config)
 
@@ -646,7 +688,7 @@ Springboot官方文档提供了17个外部配置(springboot 2.3.3)：==优先级
 
    ``java -jar xxx.jar --server.port=8083`` 多个配置用空格分隔： --配置项=值
 
-2. **JNDI系统属性**--对应上面第8条
+2.  **JNDI系统属性**--对应上面第8条
 
 3. **Java系统属性**--对应上面第9条
 
@@ -739,7 +781,7 @@ Springboot中使用下面的依赖来加载日志功能
 </dependency>
 ```
 
-![image-20200810162850533](.images/springboot日志图)
+![image-20200810162850533](images/springboot日志图)
 
 如上图所示，Springboot把log4j和jul都转换成了slf4j，然后最后使用相应的实现框架进行实现
 
