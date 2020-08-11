@@ -634,7 +634,7 @@ Springboot启动时会扫描以下位置的application.properties或者applicati
 
 ### 6.7 外部配置加载顺序
 
-Springboot官方文档提供了17个外部配置(springboot 2.3.3)：==优先级从高到低==：高优先级覆盖低优先级，不同内容的配置==会共存==![image-20200804114902447](images/external configuration)
+Springboot官方文档提供了17个外部配置(springboot 2.3.3)：==优先级从高到低==：高优先级覆盖低优先级，不同内容的配置==会共存==![image-20200804114902447](images/external%20configuration)
 
 想要了解详情可以直接去官方文档进行查看: [官方文档](https://docs.spring.io/spring-boot/docs/2.3.3.BUILD-SNAPSHOT/reference/html/spring-boot-features.html#boot-features-external-config)
 
